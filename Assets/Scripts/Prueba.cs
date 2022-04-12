@@ -7,11 +7,15 @@ public class Prueba : MonoBehaviour
     public int taxis;
     public int dia;
     public int dialluvia;
-    public int Litros;
+    int Litros;
+    int diastotal;
     // Start is called before the first frame update
+    // 1 dia = 90km = 6 litros
+    // 1 dia lluvia = 110km = 7litros
     void Start()
     {
-        if (dia + dialluvia < 5)
+        int diatotal = dialluvia + dia;
+        if (diatotal < 5)
         {
             Debug.Log("ERROR: Se tienen que ingresar más de 5 dias en total");
         }
@@ -19,10 +23,15 @@ public class Prueba : MonoBehaviour
         {
             Debug.Log("ERROR: Los dias de lluvia tienen que ser mayores a 0");
         }
-        else if(dia + dialluvia >= 5)
+        else if(dialluvia > diastotal)
         {
-            Debug.Log("Una flota de" + taxis + "unidades trabajando durante" + dia + dialluvia +
-                "días implicará un gasto de" + Litros*130 + "pesos en concepto de combustible");
+            Debug.Log("ERROR: Los dias de lluvia tienen que ser menos que la suma de los dias normales y con lluvia");
+        }
+
+        else if(diatotal >= 5)
+        {
+            Debug.Log("Una flota de" + taxis + "unidades trabajando durante" + diatotal +
+                "días implicará un gasto de" +  (dia*6) + (dialluvia*7) + "pesos en concepto de combustible");
         }
     }
 
